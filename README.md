@@ -1,6 +1,6 @@
-# Python Repository Template
+# MAST-Upgrade BaySAR Analysis
 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Scripts to analyse the atomic line spectrum measured from the MAST-Upgrade tokamak. 
 
 Step:
 1. Set up the repo/project
