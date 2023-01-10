@@ -1,6 +1,6 @@
 # Simple C II Analysis
 
-The emission of a C II line ($\epsilon$) can be modelled by the following equations. 
+The emission of a C II line ($$ \epsilon $$) can be modelled by the following equations. 
 
 $$ \epsilon = \frac{1}{4\pi} \int c_z TEC(n_e, T_e, \tau_z)\ dl $$
 
