@@ -2,9 +2,9 @@
 
 The emission of a C II line ($\epsilon$) can be modelled by the following equations. 
 
-$$ \epsilon = \frac{1}{4\pi} \int c_z TEC(n_e, T_e, \tau_z)\ dl $$
+$$ \epsilon = \frac{1}{4\pi} \int c_z n_e TEC(n_e, T_e, \tau_z)\ dl $$
 
-$$  TEC_{z, ij}(n_e, T_e, \tau_z) = n_e^2 \(f_z PEC_{ij}^{exc} + f_{z+1} PEC_{ij}^{rec}\) $$
+$$  TEC_{z, ij}(n_e, T_e, \tau_z) = n_e \(f_z PEC_{ij}^{exc} + f_{z+1} PEC_{ij}^{rec}\) $$
 
 Where $c_z$ is the impurity (carbon) concentration, $TEC$ is the _Total Emission Coefficient_, $n_e$ is the electron 
 density, $T_e$ is the electron temperature, $\tau_z$ is the impurity residence time (a proxy for impurity transport), 
@@ -22,4 +22,4 @@ assumptions:
 
 Using these assumptions the carbon concentration can be calculated as:
 
-$$ c_z = \frac{\epsilon 4 \pi}{\delta l TEC(n_e, T_e)} $$
+$$ c_z = \frac{\epsilon 4 \pi}{\delta l n_e^{Stark} TEC(n_e^{Stark}, T_e)} $$
