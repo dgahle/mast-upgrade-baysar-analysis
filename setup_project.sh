@@ -6,9 +6,9 @@
 ########################################################################################################################
 
 ### Setting up the python environment
-source /c/ProgramData/Anaconda3/etc/profile.d/conda.sh
-conda create -n MyVirEnv python=3.10 --yes
-conda activate MyVirEnv
+source ~/Anaconda3/etc/profile.d/conda.sh
+conda create -n MAST-Upgrade-Analysis python=3.8 --yes
+conda activate MAST-Upgrade-Analysis
 pip install -r requirements.txt
 
 ### Setting up the repo directories
