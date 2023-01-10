@@ -18,4 +18,8 @@ assumptions:
 2. Impurity transport is negligible, $\tau_z \approx \infty$;
 3. The PDF (_Probability Distribution Function_) of $T_e$ can be described by normalising $TEC(T_e)$;
 4. $n_e$ of the emission region is similar to the Stark density, $\langle n_e \rangle_{\epsilon} = n_e^{Stark}$
+5. A wide PDF of $\delta l$ is defined in reference to appropriate SOLPS simulations.
 
+Using these assumptions the carbon concentration can be calculated as:
+
+$$ c_z = \frac{\epsilon 4 \pi}{\delta l TEC(n_e, T_e)} $$
