@@ -1,6 +1,6 @@
 # Simple C II Analysis
 
-The emission of a C II line ($$ \epsilon $$) can be modelled by the following equations. 
+The emission of a C II line ($\epsilon$) can be modelled by the following equations. 
 
 $$ \epsilon = \frac{1}{4\pi} \int c_z TEC(n_e, T_e, \tau_z)\ dl $$
 
@@ -14,8 +14,8 @@ Emission Coefficient_ for the electronic transition from level $i$ to $j$ for ex
 A simple analysis to infer the carbon concentration, $c_z$, from a single C II line can be done by making a series of 
 assumptions:
 
-1. Emission path is homogeneous, $$ \int dl = \delta l$$ (a slab model);
+1. Emission path is homogeneous, $\int dl = \delta l$ (a slab model);
 2. Impurity transport is negligible, $\tau_z \approx \infty$;
 3. The PDF (_Probability Distribution Function_) of $T_e$ can be described by normalising $TEC(T_e)$;
-4. $n_e$ of the emission region is similar to the Stark density, $$ \langle n_e \rangle_{\epsilon} = n_e^{Stark}$$
+4. $n_e$ of the emission region is similar to the Stark density, $\langle n_e \rangle_{\epsilon} = n_e^{Stark}$
 
