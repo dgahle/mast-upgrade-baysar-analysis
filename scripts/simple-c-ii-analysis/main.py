@@ -1,15 +1,18 @@
 # Imports
-from backend import get_logger
+from backend import get_logger, read_adf15
 from numpy import array, diag, load, ndarray, square, trapz, zeros
 from numpy.random import multivariate_normal
 from pathlib import Path
 from scipy.constants import pi
+from xarray import DataArray
 
 
 # Variables
 script_name: str = Path(__file__).name
 logger = get_logger(script_name)
-data_path: Path = Path(__file__).parent.parent.parent / "input" / "simple-c-ii-analysis" / "46578_1.npy"
+REPO_PATH: Path = Path(__file__).parent.parent.parent
+C_II_ADF15_PATH: Path = REPO_PATH / "Open-ADAS" / "pec96#c_vsu#c1.dat "
+data_path: Path = REPO_PATH / "input" / "simple-c-ii-analysis" / "46578_1.npy"
 
 
 # Functions and classes
@@ -35,11 +38,15 @@ def get_posterior_distribution() -> ndarray:
 def calculate_tec_sample(electron_density: ndarray, electron_temperature: ndarray) -> ndarray:
     logger.warning('Not implemented properly all TECs = 1.')
     # logger.info('Evaluate ionisation balance')
-    # logger.info('Evaluate PECs')
+    logger.info('Evaluate PECs')
+    blocks: list = [24, 74]
+    pecs: DataArray = read_adf15(C_II_ADF15_PATH, block=blocks, ne=electron_density, te=electron_temperature)
+    pecs: ndarray = pecs.data.mean(1)  # (block, duplicate, sample)
+    pecs_exc, pecs_rec = pecs
     # total_emission_coefficient: ndarray = electron_temperature * (
     #     f_exc * pec_excitation + f_rec * pec_recombination
     # )
-    total_emission_coefficient: ndarray = 1. + zeros(electron_density.shape)
+    total_emission_coefficient: ndarray = electron_density * 0.5 * (pecs_exc + pecs_rec)
     return total_emission_coefficient
 
 
