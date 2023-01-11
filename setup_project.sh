@@ -14,6 +14,7 @@ pip install -r requirements.txt
 ### Setting up the repo directories
 mkdir input
 mkdir output
+mkdir Open-ADAS
 
 ## Create config.JSON for the user (copy from metadata)
 cp metadata/config.json config.json
