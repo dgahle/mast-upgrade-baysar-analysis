@@ -4,7 +4,6 @@
 #
 #
 # Imports
-from backend import get_logger
 from numpy import array, ndarray, where
 from pathlib import Path
 from pandas import DataFrame
@@ -12,7 +11,7 @@ from urllib import request
 
 
 # Variables
-logger = get_logger(Path(__file__).name)
+
 
 
 # Functions
