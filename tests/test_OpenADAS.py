@@ -1,5 +1,5 @@
 # Imports
-from backend.OpenADAS import get_adf15
+from backend.OpenADAS import get_adf15, list_adf15s
 
 
 # Variables
@@ -24,6 +24,21 @@ class TestGetAdf15:
         element: str = 'h'
         charge: int = 0
         get_adf15(element, charge, year=12)
+        assert True
+
+
+class TestListAdf15s:
+
+    def test_one(self):
+        list_adf15s(element='c')
+        assert True
+
+    def test_two(self):
+        list_adf15s(element='n', charge=4)
+        assert True
+
+    def test_three(self):
+        list_adf15s(element='ar', charge=3, wave_min=10, wave_max=2000)
         assert True
 
 
