@@ -41,16 +41,6 @@ def get_adf15(
 
 
 def main() -> None:
-    # Imports
-    from tqdm import tqdm
-    # Test runs
-    logger.info('Testing get_adf15')
-    element: str
-    elements: str = ['c', 'n', 'ne']
-    charge: int = 2
-    for element in tqdm(elements):
-        get_adf15(element, charge)
-    logger.info('Tests completed!')
     pass
 
 if __name__ == "__main__":
