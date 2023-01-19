@@ -131,7 +131,8 @@ def load_adf15(adf15: [str, Path], passed: bool = False) -> DataArray:
 def read_adf15(adf15: [str, Path],
                block: [int, list],
                ne: ndarray,
-               te: ndarray) -> DataArray:
+               te: ndarray,
+               passed: bool = False) -> DataArray:
     """
     Reads ADAS formatted ADF15 (PEC files) and returns
 
@@ -142,7 +143,7 @@ def read_adf15(adf15: [str, Path],
     :return:
     """
     # Load DataArray
-    adf15_model: DataArray = load_adf15(adf15)
+    adf15_model: DataArray = load_adf15(adf15, passed=passed)
     # Interpolate to get desired values
     block: list = [block] if type(block) is int else block
     kwargs: dict = dict(fill_value="extrapolate")
