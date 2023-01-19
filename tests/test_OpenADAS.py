@@ -1,11 +1,26 @@
 # Imports
-from backend.OpenADAS import get_adf15, list_adf15s
+from backend.OpenADAS import get_adf11, get_adf15, list_adf15s
 
 
 # Variables
 
 
 # Functions and classes
+class TestGetAdf11:
+
+    def test_one(self) -> None:
+        get_adf11(element='h', adf11type='acd', year=12)
+        assert True
+
+    def test_two(self) -> None:
+        get_adf11(element='li', adf11type='scd', year=93, resolved=True)
+        assert True
+
+    def test_three(self) -> None:
+        get_adf11(element='c', adf11type='ccd', resolved=True)
+        assert True
+
+
 class TestGetAdf15:
 
     def test_C_III(self):
