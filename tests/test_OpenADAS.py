@@ -28,22 +28,16 @@ class TestGetAdf11:
 class TestGetAdf15:
 
     def test_C_III(self):
-        element: str = 'c'
-        charge: int = 2
-        get_adf15(element, charge)
-        assert True
+        adf15: str = get_adf15(element='c', charge=2)
+        assert type(adf15) is str
 
     def test_Ne_III(self):
-        element: str = 'ne'
-        charge: int = 2
-        get_adf15(element, charge)
-        assert True
+        adf15: str = get_adf15(element='ne', charge=2)
+        assert type(adf15) is str
 
     def test_H_I(self):
-        element: str = 'h'
-        charge: int = 0
-        get_adf15(element, charge, year=12)
-        assert True
+        adf15: str = get_adf15(element='h', charge=0, year=12)
+        assert type(adf15) is str
 
 
 class TestListAdf15s:

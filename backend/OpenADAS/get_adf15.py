@@ -144,7 +144,7 @@ def get_adf15(
         year: int = 96,
         resolved: bool = False,
         visible: bool = True
-    ) -> None:
+    ) -> str:
     """
     Download OpenADAS ADF15 library.
 
@@ -158,9 +158,9 @@ def get_adf15(
     download_url: str = f'https://open.adas.ac.uk/download/adf15/pec{year}][{element}/pec{year}][{element}_{visible}{resolution}][{element}{charge}.dat'
     # Download
     with request.urlopen(download_url) as f:
-        _: str = f.read().decode('utf-8')
+        adf15: str = f.read().decode('utf-8')
 
-    pass
+    return adf15
 
 
 def main() -> None:
