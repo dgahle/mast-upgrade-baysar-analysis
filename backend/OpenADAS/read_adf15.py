@@ -116,10 +116,13 @@ def build_adf15_dataarray(adf15_raw: str) -> DataArray:
     return data_adf15
 
 
-def load_adf15(adf15: [str, Path]) -> DataArray:
+def load_adf15(adf15: [str, Path], passed: bool = False) -> DataArray:
     # Load as text file
-    with open(adf15, 'r') as f:
-        adf15_raw: str = f.read()
+    if not passed:
+        with open(adf15, 'r') as f:
+            adf15_raw: str = f.read()
+    else:
+        adf15_raw: str = adf15
     # Separate by block nuber
     adf15_model: DataArray = build_adf15_dataarray(adf15_raw)
     return adf15_model
@@ -148,41 +151,7 @@ def read_adf15(adf15: [str, Path],
 
 
 def main() -> None:
-    """
-    Test run of load_adf15
-
-    # adf15_block.plot.line(x='Te', xscale='log', yscale='log')
-    # adf15_blocks['1'].interp(ne=[1e14], Te=[10])
-
-    :return None:
-    """
-    from time import time
-    # Files to test read_adf15 on
-    folders: list = [
-        'boron',
-        'nitrogen',
-        'nitrogen',
-        'nitrogen',
-    ]
-    test_files: list = [
-        'pecXXb_pjub1.dat',
-        'n_ii_3900_4900_te_1_100.pass',
-        'pec96#n_vsu#n1.dat',
-        'n_v_vsu.pass',
-    ]
-    # Test read_adf15 and run
-    file: str
-    folder: str
-    blocks: list = [1, 2]
-    ne: ndarray = array([3e12, 3e14])
-    te: ndarray = array([2.3, 11.])
-    print('Test runs:')
-    for folder, file in zip(folders, test_files):
-        t0: float = time()
-        test_file: Path = ADAS_PATH / 'adf15' / folder / file
-        _ = read_adf15(test_file, block=blocks, ne=ne, te=te)
-        dt: float = round(1e3 * (time() - t0), 1)
-        print(f"{4*''} - {file} loaded in {dt} ms")
+    pass
 
 
 if __name__ == "__main__":
