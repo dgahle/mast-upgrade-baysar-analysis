@@ -21,8 +21,33 @@ def get_adf11(
     """
     Download OpenADAS ADF11 library.
 
+    Examples:
+        - Hydrogen recombination rates `adf11: str = get_adf11(element='h', adf11type='acd', year=12)`.
+        - Lithium ionisation rates resolved by metastables `adf11: str = get_adf11(element='li', adf11type='scd', year=93, resolved=True)`
+        - Carbon charge exchange rates resolved by metastables `adf11: str = get_adf11(element='c', adf11type='ccd', resolved=True)`
+        - Nitrogen ionisation rates `adf11: str = get_adf11(element='n', adf11type='scd')`
 
-    :return:
+    :param (str) element:
+        Element abbreviation for the requested data (lower case). For example hydrogen is 'h' and lithium is 'li'.
+    :param (str) adf11type:
+        Three letter code for the types of data (lower case):
+            'acd' - Recombination
+            'scd' - Ionisation
+            'xcd' - Spin change within a charge state
+            'qcd' - Spin change within a charge state via the z+1 charge state
+            'ccd' - Charge-exchange
+            'plt' - Total excitation line radiative power
+            'prb' - Total recombination radiative power (line, recombination continuum, and bremsstrahlung)
+            'prc' - Line power from thermal neutral hydrogen-ion charge exchange
+            'pls' - Line radiative power of selected transitions of key ions
+    :param (int) year: 96
+        Reference year for the data. Most ADF11 files will have year 93 and 96 versions. Hydrogen ACD and SCD files
+        have year 12 data. Broadly the newer data is "better" as it is created to overcome limitations in the older
+        data.
+    :param (bool) resolved: False
+        Metastable resolution of the GCR model used to calculate the data.
+    :return (str) adf11:
+        The adf11 file downloaded as a string
     """
     # Format inputs
     resolution: str = 'r' if resolved else ''
