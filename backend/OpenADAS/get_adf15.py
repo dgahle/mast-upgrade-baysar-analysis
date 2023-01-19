@@ -144,12 +144,27 @@ def get_adf15(
         year: int = 96,
         resolved: bool = False,
         visible: bool = True
-    ) -> None:
+    ) -> str:
     """
-    Download OpenADAS ADF15 library.
+    Download adf15 files from the OpenADAS library. Typically, adf15 files will contain excitation and recombination
+    PECs. In somes cases there will
 
+    Examples:
+        - C III PECs `adf15: str = get_adf15(element='c', charge=2)`
+        - Ne III PECs `adf15: str = get_adf15(element='ne', charge=2)`
+        - H I PECs `adf15: str = get_adf15(element='h', charge=0, year=12)`
 
-    :return:
+    :param (str) element:
+        Element abbreviation for the requested data (lower case). For example hydrogen is 'h' and lithium is 'li'.
+    :param (int) charge:
+        Charge state of the ion whose PECs are wanted.
+    :param (int) year: 96
+        Reference year for the data. Most ADF11 files will have year 93 and 96 versions. Broadly the newer data is
+        "better" as it is created to overcome limitations in the older data.
+    :param (bool) resolved: False
+    :param (bool) visible: True
+    :return (str) adf15:
+        The adf11 file downloaded as a string
     """
     # Format inputs
     resolution: str = 'r' if resolved else 'u'
@@ -158,9 +173,9 @@ def get_adf15(
     download_url: str = f'https://open.adas.ac.uk/download/adf15/pec{year}][{element}/pec{year}][{element}_{visible}{resolution}][{element}{charge}.dat'
     # Download
     with request.urlopen(download_url) as f:
-        _: str = f.read().decode('utf-8')
+        adf15: str = f.read().decode('utf-8')
 
-    pass
+    return adf15
 
 
 def main() -> None:
