@@ -1,0 +1,25 @@
+# Simple C II Analysis
+
+The emission of a C II line ($\epsilon$) can be modelled by the following equations. 
+
+$$ \epsilon = \frac{1}{4\pi} \int c_z n_e TEC(n_e, T_e, \tau_z)\ dl $$
+
+$$  TEC_{z, ij}(n_e, T_e, \tau_z) = n_e \(f_z PEC_{ij}^{exc} + f_{z+1} PEC_{ij}^{rec}\) $$
+
+Where $c_z$ is the impurity (carbon) concentration, $TEC$ is the _Total Emission Coefficient_, $n_e$ is the electron 
+density, $T_e$ is the electron temperature, $\tau_z$ is the impurity residence time (a proxy for impurity transport), 
+$f_{z, z+1}$ is the fractional abundance of the $z$ and $z+1$ charge states, and $PEC_{ij}^{exc, rec}$ is the _Photon 
+Emission Coefficient_ for the electronic transition from level $i$ to $j$ for excitation and recombination respectively.     
+
+A simple analysis to infer the carbon concentration, $c_z$, from a single C II line can be done by making a series of 
+assumptions:
+
+1. Emission path is homogeneous, $\int dl = \delta l$ (a slab model);
+2. Impurity transport is negligible, $\tau_z \approx \infty$;
+3. The PDF (_Probability Distribution Function_) of $T_e$ can be described by normalising $TEC(T_e)$;
+4. $n_e$ of the emission region is similar to the Stark density, $\langle n_e \rangle_{\epsilon} = n_e^{Stark}$
+5. A wide PDF of $\delta l$ is defined in reference to appropriate SOLPS simulations.
+
+Using these assumptions the carbon concentration can be calculated as:
+
+$$ c_z = \frac{\epsilon 4 \pi}{\delta l n_e^{Stark} TEC(n_e^{Stark}, T_e)} $$
