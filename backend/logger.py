@@ -47,9 +47,12 @@ def get_logger(name: str, set_cmd: bool = True, set_path: bool = True) -> loggin
     """
     Set up the logging module for the model run.
 
-    :param str name:
-    :param bool set_cmd:
-    :param bool set_path:
+    :param (str) name:
+        Name of the logger object returned and used in the log to note which loggers are writing to the log.
+    :param (bool) set_cmd: True
+        Switch for writing the log to the stdout
+    :param (bool) set_path: True
+        Switch for writing the log to file (*.log)
     :return:
     """
     # Instantiate the logger
@@ -60,6 +63,8 @@ def get_logger(name: str, set_cmd: bool = True, set_path: bool = True) -> loggin
     filename = logger_path if set_path else None
     logging.basicConfig(filename=filename, level=logging.INFO, **logger_format_dict)
     # Printing the logger to the command line
+    set_cmd_check: bool = set_path is False and set_cmd is True
+    set_cmd: bool = False if set_cmd_check else set_cmd
     if set_cmd:
         ch = logging.StreamHandler()
         ch.setLevel(logging.DEBUG)
