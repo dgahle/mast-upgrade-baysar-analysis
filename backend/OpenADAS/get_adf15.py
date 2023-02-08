@@ -191,8 +191,13 @@ def get_adf15(
     # Format inputs
     resolution: str = 'r' if resolved else 'u'
     visible: str = 'vs' if visible else 'pj'
+    visible_resolution_type: str = f'{visible}{resolution}'
+    # Hydrogen Balmer lines check
+    balmer_check: bool = element == 'h' and visible == 'vs'
+    visible_resolution_type = 'balmer' if balmer_check else visible_resolution_type
     # Construct the download URL
-    download_url: str = f'https://open.adas.ac.uk/download/adf15/pec{year}][{element}/pec{year}][{element}_{visible}{resolution}][{element}{charge}.dat'
+    url_root: str = 'https://open.adas.ac.uk/download/adf15'
+    download_url: str = f'{url_root}/pec{year}][{element}/pec{year}][{element}_{visible_resolution_type}][{element}{charge}.dat'
     # Download
     with request.urlopen(download_url) as f:
         adf15: str = f.read().decode('utf-8')
