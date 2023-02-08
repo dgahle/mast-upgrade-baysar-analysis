@@ -47,9 +47,12 @@ def get_logger(name: str, set_cmd: bool = True, set_path: bool = True) -> loggin
     """
     Set up the logging module for the model run.
 
-    :param str name:
-    :param bool set_cmd:
-    :param bool set_path:
+    :param (str) name:
+        Name of the logger object returned and used in the log to note which loggers are writing to the log.
+    :param (bool) set_cmd: True
+        Switch for writing the log to the stdout
+    :param (bool) set_path: True
+        Switch for writing the log to file (*.log)
     :return:
     """
     # Instantiate the logger
