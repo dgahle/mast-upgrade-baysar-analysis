@@ -138,6 +138,28 @@ def list_adf15s(
     pass
 
 
+def _adf15_exist(adf15: str, download_url: str) -> None:
+    """
+    Checks that an adf15 was downloaded.
+
+    :param (str) adf15:
+        The adf15 file downloaded from OpenADAS.
+    :param (str) download_url:
+        OpenADAS URL to download the adf15
+
+    :return: None
+
+    :raise ValueError:
+        No adf15 downloaded.
+    """
+    if 'OPEN-ADAS Error' in adf15:
+        # Extract adf15 file name from url
+        adf15_name: str = '#'.join(download_url.split('][')[1:]).split('/')[1]
+        # Write error message and raise error
+        err_msg: str = f"No ADF15 was downloaded, '{adf15_name}' does not exist (url: '{download_url}')!"
+        raise ValueError(err_msg)
+
+
 def get_adf15(
         element: str,
         charge: int,
@@ -169,11 +191,18 @@ def get_adf15(
     # Format inputs
     resolution: str = 'r' if resolved else 'u'
     visible: str = 'vs' if visible else 'pj'
+    visible_resolution_type: str = f'{visible}{resolution}'
+    # Hydrogen Balmer lines check
+    balmer_check: bool = element == 'h' and visible == 'vs'
+    visible_resolution_type = 'balmer' if balmer_check else visible_resolution_type
     # Construct the download URL
-    download_url: str = f'https://open.adas.ac.uk/download/adf15/pec{year}][{element}/pec{year}][{element}_{visible}{resolution}][{element}{charge}.dat'
+    url_root: str = 'https://open.adas.ac.uk/download/adf15'
+    download_url: str = f'{url_root}/pec{year}][{element}/pec{year}][{element}_{visible_resolution_type}][{element}{charge}.dat'
     # Download
     with request.urlopen(download_url) as f:
         adf15: str = f.read().decode('utf-8')
+    # Check download
+    _adf15_exist(adf15, download_url)
 
     return adf15
 
