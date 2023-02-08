@@ -60,6 +60,8 @@ def get_logger(name: str, set_cmd: bool = True, set_path: bool = True) -> loggin
     filename = logger_path if set_path else None
     logging.basicConfig(filename=filename, level=logging.INFO, **logger_format_dict)
     # Printing the logger to the command line
+    set_cmd_check: bool = set_path is False and set_cmd is True
+    set_cmd: bool = False if set_cmd_check else set_cmd
     if set_cmd:
         ch = logging.StreamHandler()
         ch.setLevel(logging.DEBUG)
