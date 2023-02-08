@@ -13,7 +13,7 @@ class TestGetAdf15:
         assert type(adf15) is str
 
     def test_Ne_III(self):
-        adf15: str = get_adf15(element='ne', charge=2)
+        adf15: str = get_adf15(element='ne', charge=2, visible=False)
         assert type(adf15) is str
 
     def test_H_I(self):
