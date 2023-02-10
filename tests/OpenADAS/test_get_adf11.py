@@ -21,7 +21,7 @@ class TestGetAdf11:
         assert type(adf11) is str
 
     def test_four(self) -> None:
-        adf11: str = get_adf11(element='n', adf11type='scd')
+        adf11: str = get_adf11(element='n', adf11type='qcd')
         assert type(adf11) is str
 
 
