@@ -5,6 +5,7 @@
 #
 # Imports
 from urllib import request
+from .tools import _adf_exists_check
 
 
 # Variables
@@ -50,13 +51,17 @@ def get_adf11(
         The adf11 file downloaded as a string
     """
     # Format inputs
+    spin_change_reactions: list = ['xcd', 'qcd']
+    resolved: bool = True if adf11type in spin_change_reactions else resolved
     resolution: str = 'r' if resolved else ''
     adf11type = f'{adf11type}{year}{resolution}'
     # Construct the download URL
-    download_url: str = f'https://open.adas.ac.uk/download/adf11/{adf11type}_{adf11type}{element}.dat'
+    download_url: str = f'https://open.adas.ac.uk/download/adf11/{adf11type}/{adf11type}_{element}.dat'
     # Download
     with request.urlopen(download_url) as f:
         adf11: str = f.read().decode('utf-8')
+    # Check download
+    _adf_exists_check(adf11, download_url)
 
     return adf11
 
