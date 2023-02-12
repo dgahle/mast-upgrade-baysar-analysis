@@ -30,6 +30,11 @@ class TestLoadAdf11:
         adf11_model: DataArray = load_adf11(adf11, passed=True)
         assert type(adf11_model) is DataArray
 
+    def test_Ne_XCD(self) -> None:
+        adf11: str = get_adf11(element='ne', adf11type='xcd')
+        adf11_model: DataArray = load_adf11(adf11, passed=True)
+        assert type(adf11_model) is DataArray
+
 
 class TestLoadAdf11Power:
 
