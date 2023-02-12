@@ -15,62 +15,6 @@ Adf11_SEPARATOR: str = 'C-------------------------------------------------------
 
 
 # Functions
-def get_number_of_blocks(adf11_raw: str) -> int:
-    header: str = adf11_raw.split('\n')[0]
-    total_blocks: int = int(
-        header.split()[0]
-    )
-    return total_blocks
-
-
-def block_str_to_array(adf11_block: list) -> DataArray:
-    header: list = adf11_block[0].split()
-    num_ne_index: int = 2 if header[1] == 'A' else 1
-    num_te_index: int = 3 if header[1] == 'A' else 2
-    num_ne: int = int(header[num_ne_index])
-    num_te: int = int(header[num_te_index])
-    pecs: str = ' '.join(adf11_block[1:])
-    pecs: ndarray = array([float(p) for p in pecs.split()])
-    ne_slice: slice = slice(0, num_ne)
-    te_slice: slice = slice(num_ne, num_ne + num_te)
-    ne: ndarray = pecs[ne_slice]
-    te: ndarray = pecs[te_slice]
-    pecs: ndarray = pecs[te_slice.stop:].reshape((num_ne, num_te))
-    # dims: tuple = ('ne / cm-3', 'Te / eV')
-    dims: tuple = ('ne', 'Te')
-    coords: dict = dict(
-        ne=ne,
-        Te=te
-    )
-    attrs: dict = dict(
-        description=adf11_block[0],
-        units='cm3/s'
-    )
-    block_array: DataArray = DataArray(pecs, dims=dims, coords=coords, name='pecs', attrs=attrs)
-    return block_array
-
-
-def block_start_check(line: str) -> bool:
-    checks: list = [
-        'EXCIT', 'RECOM', 'CHEXC', 'TYPE', 'type'
-    ]
-    checks: list = [ch in line for ch in checks]
-    check: int = sum(checks)
-    check: bool = True if check == 2 else False
-    return check
-
-
-def get_header_slice(adf11_raw: str) -> int:
-    adf11: list = adf11_raw.split('\n')
-    i: int
-    line: str
-    for i, line in enumerate(adf11):
-        if block_start_check(line):
-            return i
-    else:
-        raise ValueError('No line found!')
-
-
 def build_adf11_dataarray(adf11_raw: str) -> DataArray:
     # Get the line of the first block, this is needed to extract both the {ne, Te} grid and the rates
     first_block_str: str = "---------------------/ "  # IPRT= "  # 1  / IGRD= 1 "
