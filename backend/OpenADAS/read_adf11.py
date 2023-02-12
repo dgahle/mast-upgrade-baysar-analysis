@@ -130,10 +130,6 @@ def build_adf11_dataarray(adf11_raw: str) -> DataArray:
         attrs=attrs
     )
 
-    from matplotlib.pyplot import show
-    data_adf11.isel(block=0).plot()  # .show()
-    show()
-
     return data_adf11
 
 
