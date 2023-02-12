@@ -16,7 +16,7 @@ class TestLoadAdf11:
         assert type(adf11_model) is DataArray
 
     def test_Li_SCD_93_r(self):
-        adf11: str = get_adf11(element='li', adf11type='scd', year=93, resolved=True)
+        adf11: str = get_adf11(element='li', adf11type='scd', year=96, resolved=True)
         adf11_model: DataArray = load_adf11(adf11, passed=True)
         assert type(adf11_model) is DataArray
 
