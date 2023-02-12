@@ -72,18 +72,23 @@ def get_header_slice(adf11_raw: str) -> int:
 
 
 def build_adf11_dataarray(adf11_raw: str) -> DataArray:
+    # Get the line of the first block, this is needed to extract both the {ne, Te} grid and the rates
+    first_block_str: str = "---------------------/ IPRT= 1  / IGRD= 1 "
+    check: list = [line.startswith(first_block_str) for line in adf11_raw.split('\n')]
+    check_indices: ndarray = arange(len(check))[check]
+    if check_indices.shape == (0,):
+        raise ValueError("Could not find the first block of rates in the adf11 file!")
+    start_block: int = check_indices[0]
     # Get the data shape (block, ne, Te)
     data_shape: tuple = tuple(int(n) for n in adf11_raw.split('\n')[0].split()[:3])
     # Get the (ne, Te) grid
+    flat_grid: list = ' '.join(adf11_raw.split('\n')[:start_block]).split('---')[-1].split()[1:]
     flat_grid: ndarray = array(
-        [
-            float(n) for n in [s for s in adf11_raw.split('---') if s != ''][1].split()[1:]
-        ]
+        [float(n) for n in flat_grid]
     )
     ne: ndarray = flat_grid[:data_shape[1]]
     te: ndarray = flat_grid[data_shape[1]:]
     # Get the number of lines in each block
-    start_block: int = 9
     len_block: int = int(
         ceil(data_shape[1] * data_shape[2] / 8)
     )
