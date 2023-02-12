@@ -15,7 +15,7 @@ class TestLoadAdf11:
         adf11_model: DataArray = load_adf11(adf11, passed=True)
         assert type(adf11_model) is DataArray
 
-    def test_Li_SCD_93_r(self):
+    def test_Li_SCD_96_r(self):
         adf11: str = get_adf11(element='li', adf11type='scd', year=96, resolved=True)
         adf11_model: DataArray = load_adf11(adf11, passed=True)
         assert type(adf11_model) is DataArray
@@ -27,6 +27,29 @@ class TestLoadAdf11:
 
     def test_N_QCD(self):
         adf11: str = get_adf11(element='n', adf11type='qcd')
+        adf11_model: DataArray = load_adf11(adf11, passed=True)
+        assert type(adf11_model) is DataArray
+
+
+class TestLoadAdf11Power:
+
+    def test_H_PLT_yr12(self) -> None:
+        adf11: str = get_adf11(element='h', adf11type='plt', year=12)
+        adf11_model: DataArray = load_adf11(adf11, passed=True)
+        assert type(adf11_model) is DataArray
+
+    def test_H_PRB_yr12(self) -> None:
+        adf11: str = get_adf11(element='h', adf11type='prb', year=12)
+        adf11_model: DataArray = load_adf11(adf11, passed=True)
+        assert type(adf11_model) is DataArray
+
+    def test_C_PLT(self) -> None:
+        adf11: str = get_adf11(element='c', adf11type='plt')
+        adf11_model: DataArray = load_adf11(adf11, passed=True)
+        assert type(adf11_model) is DataArray
+
+    def test_N_PRB(self) -> None:
+        adf11: str = get_adf11(element='c', adf11type='prb')
         adf11_model: DataArray = load_adf11(adf11, passed=True)
         assert type(adf11_model) is DataArray
 
