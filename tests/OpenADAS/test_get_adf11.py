@@ -35,7 +35,7 @@ class TestGetAdf11Power:
         adf11: str = get_adf11(element='h', adf11type='plt', year=12)
         assert type(adf11) is str
 
-    def test_H_PLB_yr12(self) -> None:
+    def test_H_PRB_yr12(self) -> None:
         adf11: str = get_adf11(element='h', adf11type='prb', year=12)
         assert type(adf11) is str
 
@@ -43,7 +43,7 @@ class TestGetAdf11Power:
         adf11: str = get_adf11(element='c', adf11type='plt')
         assert type(adf11) is str
 
-    def test_N_PLB(self) -> None:
+    def test_N_PRB(self) -> None:
         adf11: str = get_adf11(element='c', adf11type='prb')
         assert type(adf11) is str
 
