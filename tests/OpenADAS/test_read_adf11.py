@@ -37,28 +37,28 @@ class TestReadAdf11:
         ne: ndarray = array([1e13, 1e14, 1e15])
         te: ndarray = array([3, 5, 10], dtype=float)
         adf11: str = get_adf11(element='h', adf11type='acd', year=12)
-        adf11_model: DataArray = read_adf11(adf11, ne=ne, te=te, passed=True)
+        adf11_model: DataArray = read_adf11(adf11, block=1, ne=ne, te=te, passed=True)
         assert type(adf11_model) is DataArray
 
     def test_Li_SCD_93_r(self):
         ne: ndarray = array([1e13, 1e14, 1e15])
         te: ndarray = array([3, 5, 10], dtype=float)
         adf11: str = get_adf11(element='li', adf11type='scd', year=93, resolved=True)
-        adf11_model: DataArray = read_adf11(adf11, ne=ne, te=te, passed=True)
+        adf11_model: DataArray = read_adf11(adf11, block=1, ne=ne, te=te, passed=True)
         assert type(adf11_model) is DataArray
 
     def test_C_CCD_r(self):
         ne: ndarray = array([1e13, 1e14, 1e15])
         te: ndarray = array([3, 5, 10], dtype=float)
         adf11: str = get_adf11(element='c', adf11type='ccd', resolved=True)
-        adf11_model: DataArray = read_adf11(adf11, ne=ne, te=te, passed=True)
+        adf11_model: DataArray = read_adf11(adf11, block=1, ne=ne, te=te, passed=True)
         assert type(adf11_model) is DataArray
 
     def test_N_QCD(self):
         ne: ndarray = array([1e13, 1e14, 1e15])
         te: ndarray = array([3, 5, 10], dtype=float)
         adf11: str = get_adf11(element='n', adf11type='qcd')
-        adf11_model: DataArray = read_adf11(adf11, ne=ne, te=te, passed=True)
+        adf11_model: DataArray = read_adf11(adf11, block=1, ne=ne, te=te, passed=True)
         assert type(adf11_model) is DataArray
 
 
