@@ -4,7 +4,7 @@
 #
 #
 # Imports
-from numpy import arange, array, ceil, ndarray, power
+from numpy import arange, array, ceil, ndarray
 from pathlib import Path
 from xarray import DataArray
 
@@ -73,7 +73,7 @@ def get_header_slice(adf11_raw: str) -> int:
 
 def build_adf11_dataarray(adf11_raw: str) -> DataArray:
     # Get the line of the first block, this is needed to extract both the {ne, Te} grid and the rates
-    first_block_str: str = "---------------------/ IPRT= 1  / IGRD= 1 "
+    first_block_str: str = "---------------------/ "  # IPRT= "  # 1  / IGRD= 1 "
     check: list = [line.startswith(first_block_str) for line in adf11_raw.split('\n')]
     check_indices: ndarray = arange(len(check))[check]
     if check_indices.shape == (0,):
@@ -161,6 +161,7 @@ def read_adf11(adf11: [str, Path],
     :param block:
     :param te:
     :param ne:
+    :param passed:
     :return:
     """
     # Load DataArray
