@@ -109,7 +109,7 @@ def read_adf11(adf11: [str, Path],
     # Interpolate to get desired values
     block: list = [block] if type(block) is int else block
     kwargs: dict = dict(fill_value="extrapolate")
-    pecs_out: DataArray = adf11_model.interp(block=block, ne=ne, Te=te, kwargs=kwargs)
+    pecs_out: DataArray = adf11_model.sel(block=block).interp(ne=ne, Te=te, kwargs=kwargs)
     return pecs_out
 
 
