@@ -4,7 +4,7 @@
 #
 #
 # Imports
-from numpy import arange, array, ceil, ndarray
+from numpy import arange, array, ceil, ndarray, power
 from pathlib import Path
 from xarray import DataArray
 
@@ -54,12 +54,12 @@ def build_adf11_dataarray(adf11_raw: str) -> DataArray:
         _rates = _rates.reshape(data_shape[1:][::-1]).T
         rates.append(_rates)
     # Format rates to build DataArray
-    rates: ndarray = array(rates)
+    rates: ndarray = power(10, rates)
     dims: tuple = ('block', 'ne', 'Te')
     coords: dict = dict(
         block=1 + arange(data_shape[0]),
-        ne=ne,
-        Te=te
+        ne=power(10, ne),
+        Te=power(10, te)
     )
     attrs: dict = dict(
         description='TBC',  # Adf11_SEPARATOR.join(adf11_raw_list[1:]),
