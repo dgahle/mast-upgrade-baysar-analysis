@@ -13,7 +13,7 @@ from tqdm import tqdm
 # Variables
 # Load config
 REPO_PATH: Path = Path(__file__).parent.parent
-CONFIG_PATH: Path = REPO_PATH / 'config.json'
+CONFIG_PATH: Path = REPO_PATH / 'metadata/config.json'
 with open(CONFIG_PATH, 'r') as f:
     CONFIG_DICT = load(f)
 # Paths
